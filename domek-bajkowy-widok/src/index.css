@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-forest-900 bg-cream;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl font-bold text-forest-800 leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-forest-600 text-lg leading-relaxed;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-forest-700 hover:bg-forest-600 text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border-2 border-forest-700 text-forest-700 hover:bg-forest-700 hover:text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-300;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center gap-2 bg-gold hover:bg-gold-dark text-forest-950 font-bold px-7 py-3.5 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/60 rounded-2xl shadow-xl;
+  }
+
+  .reveal {
+    @apply opacity-0;
+  }
+
+  .reveal.visible {
+    @apply animate-fade-up;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-cream-dark;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-forest-400 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-forest-600;
+}
+
+/* Lightbox overlay */
+.lightbox-open {
+  overflow: hidden;
+}
+
+/* Gallery tab underline */
+.tab-btn {
+  @apply relative pb-2 font-semibold text-forest-600 transition-colors duration-200 hover:text-forest-800;
+}
+.tab-btn::after {
+  content: "";
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300;
+}
+.tab-btn.active {
+  @apply text-forest-800;
+}
+.tab-btn.active::after {
+  @apply w-full;
+}
