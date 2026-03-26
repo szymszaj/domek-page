@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone, TreePine } from "lucide-react";
-
-const navLinks = [
-  { href: "#o-nas", label: "O nas" },
-  { href: "#oferta", label: "Oferta" },
-  { href: "#galeria", label: "Galeria" },
-  { href: "#atrakcje", label: "Atrakcje" },
-  { href: "#kontakt", label: "Kontakt" },
-];
+import { navLinks } from "@/data/navLinks";
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
