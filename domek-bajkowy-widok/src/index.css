@@ -53,7 +53,6 @@
   }
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -67,12 +66,10 @@
   @apply bg-forest-600;
 }
 
-/* Lightbox overlay */
 .lightbox-open {
   overflow: hidden;
 }
 
-/* Gallery tab underline */
 .tab-btn {
   @apply relative pb-2 font-semibold text-forest-600 transition-colors duration-200 hover:text-forest-800;
 }
