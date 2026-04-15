@@ -1,11 +1,11 @@
-import { OfferCard } from "@/components/Offers";
+import { OfferCard } from "@/types/offers";
 
 const offers: OfferCard[] = [
   {
     id: "zima",
     title: "Oferta zimowa",
     subtitle: "Stoki narciarskie i śnieżne widoki",
-    img: "https://domekbajkowywidok.pl/images/frontpage/01.jpg",
+    image: "https://domekbajkowywidok.pl/images/frontpage/01.jpg",
     accentColor: "from-blue-900 to-blue-700",
     headerBg: "bg-blue-900",
     items: [
@@ -33,7 +33,7 @@ const offers: OfferCard[] = [
     id: "lato",
     title: "Oferta letnia",
     subtitle: "Zalew, kajaki i górskie szlaki",
-    img: "https://domekbajkowywidok.pl/images/frontpage/02.jpg",
+    image: "https://domekbajkowywidok.pl/images/frontpage/02.jpg",
     accentColor: "from-emerald-800 to-emerald-600",
     headerBg: "bg-emerald-700",
     items: [
@@ -61,7 +61,7 @@ const offers: OfferCard[] = [
     id: "poza",
     title: "Poza sezonem",
     subtitle: "Cisza, spacery i złota jesień",
-    img: "https://domekbajkowywidok.pl/images/frontpage/03.jpg",
+    image: "https://domekbajkowywidok.pl/images/frontpage/03.jpg",
     accentColor: "from-stone-700 to-stone-500",
     headerBg: "bg-stone-600",
     items: [
