@@ -1,5 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import { useReveal } from "@/hooks/useReveal";
+import { useBookingForm } from "@/hooks/useBookingForm";
+import { useModalKeyboard } from "@/hooks/useModalKeyboard";
+import { useOfferCards } from "@/hooks/useOfferCards";
 import {
   CalendarDays,
   Users,
@@ -9,26 +12,8 @@ import {
   CheckCircle,
   Phone,
 } from "lucide-react";
+import { OfferCard } from "@/types/offers";
 import offers from "@/data/offers";
-
-interface PriceItem {
-  name: string;
-  price: string;
-  period: string;
-  nights: string;
-}
-
-export interface OfferCard {
-  id: string;
-  title: string;
-  subtitle: string;
-  img: string;
-  accentColor: string;
-  headerBg: string;
-  items: PriceItem[];
-}
-
-type ModalStatus = "idle" | "sending" | "success";
 
 function BookingModal({
   offer,
@@ -37,46 +22,11 @@ function BookingModal({
   offer: OfferCard;
   onClose: () => void;
 }) {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-    consent: false,
-  });
-  const [status, setStatus] = useState<ModalStatus>("idle");
+  const { form, status, handleChange, handleSubmit, resetForm } =
+    useBookingForm();
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value, type } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]:
-        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("sending");
-    // TODO: replace with real EmailJS / backend call
-    await new Promise((r) => setTimeout(r, 1400));
-    setStatus("success");
-  };
+  useModalKeyboard(onClose);
 
   return (
     <div
@@ -93,7 +43,7 @@ function BookingModal({
           className={`relative h-28 bg-gradient-to-br ${offer.accentColor} overflow-hidden`}
         >
           <img
-            src={offer.img}
+            src={offer.image}
             alt={offer.title}
             className="absolute inset-0 w-full h-full object-cover opacity-40"
           />
@@ -283,7 +233,7 @@ function OfferCard({
     >
       <div className="relative h-52 overflow-hidden">
         <img
-          src={offer.img}
+          src={offer.image}
           alt={offer.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
           loading="lazy"
@@ -346,7 +296,7 @@ function OfferCard({
 
 export default function Offers() {
   const ref = useReveal();
-  const [activeOffer, setActiveOffer] = useState<OfferCard | null>(null);
+  const { activeOffer, openOffer, closeOffer } = useOfferCards();
 
   return (
     <section
@@ -380,7 +330,7 @@ export default function Offers() {
               key={offer.id}
               offer={offer}
               delay={i * 120}
-              onBook={setActiveOffer}
+              onBook={openOffer}
             />
           ))}
         </div>
@@ -413,12 +363,7 @@ export default function Offers() {
         </div>
       </div>
 
-      {activeOffer && (
-        <BookingModal
-          offer={activeOffer}
-          onClose={() => setActiveOffer(null)}
-        />
-      )}
+      {activeOffer && <BookingModal offer={activeOffer} onClose={closeOffer} />}
     </section>
   );
 }
