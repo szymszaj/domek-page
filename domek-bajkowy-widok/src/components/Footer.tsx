@@ -1,3 +1,4 @@
+import { navLinks } from "@/data/navLinks";
 import {
   Phone,
   Mail,
@@ -6,14 +7,6 @@ import {
   Facebook,
   Instagram,
 } from "lucide-react";
-
-const navLinks = [
-  { href: "#o-nas", label: "O nas" },
-  { href: "#oferta", label: "Oferta" },
-  { href: "#galeria", label: "Galeria" },
-  { href: "#atrakcje", label: "Atrakcje" },
-  { href: "#kontakt", label: "Kontakt" },
-];
 
 const handleScroll = (href: string) => {
   const el = document.querySelector(href);
