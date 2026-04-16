@@ -12,7 +12,8 @@ import {
   CheckCircle,
   Phone,
 } from "lucide-react";
-import { OfferCard } from "@/types/offers";
+
+import type { OfferCard } from "@/types/offers";
 import offers from "@/data/offers";
 
 function BookingModal({
